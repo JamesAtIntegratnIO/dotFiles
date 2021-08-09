@@ -1,0 +1,63 @@
+# Add this function to your .zshrc
+# if [[ -e ~/.zshrc.public ]]; then
+#  source ~/.zshrc.public
+# fi
+
+# source private zshrc 
+# put anything you don't want to put in git there
+if [[ -e ~/.zshrc.private ]]; then
+  source ~/.zshrc.private
+fi
+
+# Set Editor to vim.
+export EDITOR=vim
+export VISUAL=vim
+
+#gpg-agent daemon
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+
+# suffix aliases to vim all the things
+if type vim &> /dev/null; then 
+    alias -s md=vim
+    alias -s go=vim
+    alias -s txt=vim
+    alias -s go=vim
+    alias -s js=vim
+    alias -s json=vim
+    alias -s py=vim
+    alias -s php=vim
+fi
+
+# FXF config 
+if type fzf &> /dev/null; then
+    #determines search program for fzf
+    if type ag &> /dev/null; then
+        export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
+    fi
+    #refer rg over ag
+    if type rg &> /dev/null; then
+        export FZF_DEFAULT_COMMAND='rg --files --hidden'
+    fi
+
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    #source fzf
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fi
+# TMUX config
+if type tmuxp &> /dev/null; then
+    # Aliases to load tmuxp layouts
+    alias tps="tmuxp load DevSessionSmall"
+    alias tpf="tmuxp load DevSessionFull"
+fi
+
+# Add Go bin
+if [[ -e ~/go/bin  ]]; then
+    export PATH=$PATH:~/go/bin
+fi
+
+# Add Spotify Completion
+if [[ -e ~/.spotify_zsh_completion ]]; then
+    source ~/.spotify_zsh_completion
+fi
