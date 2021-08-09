@@ -2,12 +2,16 @@
 # if [[ -e ~/.zshrc.public ]]; then
 #  source ~/.zshrc.public
 # fi
+#
 
 # source private zshrc 
 # put anything you don't want to put in git there
 if [[ -e ~/.zshrc.private ]]; then
   source ~/.zshrc.private
 fi
+
+# tmuxp needs this on mac
+export DISABLE_AUTO_TITLE='true'
 
 # Set Editor to vim.
 export EDITOR=vim
