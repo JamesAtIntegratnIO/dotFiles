@@ -1,0 +1,3 @@
+[submodule "vimConfig"]
+	path = vimConfig
+	url = git@github.com:JamesAtTensure/vimConfig.git
